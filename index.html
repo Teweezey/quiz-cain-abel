@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Quiz Biblique : Caïn et Abel</title>
+  <style>
+    body { font-family: Arial, sans-serif; max-width: 800px; margin: auto; padding: 20px; }
+    h1 { text-align: center; }
+    .question { margin-bottom: 20px; }
+    .bonus { color: green; font-weight: bold; }
+    button { padding: 10px 20px; font-size: 16px; }
+    .result { font-weight: bold; margin-top: 20px; font-size: 20px; }
+  </style>
+</head>
+<body>
+  <h1>Quiz Biblique : Caïn et Abel</h1>
+  <form id="quizForm">
+    <div class="question">
+      <p>1. Pourquoi Dieu était-il content du sacrifice d'Abel ?</p>
+      <label><input type="checkbox" name="q1" value="D"> Parce qu'il offrait les meilleurs animaux</label><br>
+      <label><input type="checkbox" name="q1" value="A"> Parce qu'il offrait des fruits mûrs</label><br>
+      <label><input type="checkbox" name="q1" value="B"> Parce qu'Abel avait de bonnes intentions</label><br>
+      <label><input type="checkbox" name="q1" value="C"> Parce qu'il était le plus jeune</label>
+    </div>
+    <div class="question">
+      <p>2. Pourquoi Dieu n'a-t-il pas accepté le sacrifice de Caïn ?</p>
+      <label><input type="checkbox" name="q2" value="B"> Parce que Caïn avait de mauvaises intentions</label><br>
+      <label><input type="checkbox" name="q2" value="A"> Parce qu'il a offert des légumes</label><br>
+      <label><input type="checkbox" name="q2" value="C"> Parce qu'Abel était préféré</label><br>
+      <label><input type="checkbox" name="q2" value="D"> Parce que Dieu voulait seulement des animaux</label>
+    </div>
+    <div class="question">
+      <p>3. Que ressent Caïn après que Dieu ait accepté l'offrande d'Abel ?</p>
+      <label><input type="checkbox" name="q3" value="A"> De la jalousie</label><br>
+      <label><input type="checkbox" name="q3" value="B"> De la peur</label><br>
+      <label><input type="checkbox" name="q3" value="C"> De la joie</label><br>
+      <label><input type="checkbox" name="q3" value="D"> De la reconnaissance</label>
+    </div>
+    <div class="question">
+      <p>4. Comment Dieu réagit-il face à la colère de Caïn ?</p>
+      <label><input type="checkbox" name="q4" value="B"> Il lui parle</label><br>
+      <label><input type="checkbox" name="q4" value="D"> Il l'avertit qu'il doit maîtriser ses sentiments</label><br>
+      <label><input type="checkbox" name="q4" value="A"> Il l'ignore</label><br>
+      <label><input type="checkbox" name="q4" value="C"> Il le punit immédiatement</label>
+    </div>
+    <div class="question bonus">
+      <p>5. (BONUS) Quel conseil Dieu donne-t-il directement à Caïn concernant le péché ?</p>
+      <label><input type="checkbox" name="q5" value="C"> Le péché est comme un animal prêt à bondir</label><br>
+      <label><input type="checkbox" name="q5" value="A"> Le péché est ton ami</label><br>
+      <label><input type="checkbox" name="q5" value="B"> Le péché est comme un fardeau</label><br>
+      <label><input type="checkbox" name="q5" value="D"> Le péché est une punition de Dieu</label>
+    </div>
+    <div class="question">
+      <p>6. Comment Caïn a-t-il tué Abel ?</p>
+      <label><input type="checkbox" name="q6" value="C"> En l'invitant aux champs et en l'attaquant</label><br>
+      <label><input type="checkbox" name="q6" value="A"> En lui tendant un piège</label><br>
+      <label><input type="checkbox" name="q6" value="B"> En se disputant avec lui</label><br>
+      <label><input type="checkbox" name="q6" value="D"> En l'empoisonnant</label>
+    </div>
+    <div class="question">
+      <p>7. Que dit Caïn quand Dieu lui demande où est Abel ?</p>
+      <label><input type="checkbox" name="q7" value="B"> "Suis-je le gardien de mon frère ?"</label><br>
+      <label><input type="checkbox" name="q7" value="A"> "Il est à la maison"</label><br>
+      <label><input type="checkbox" name="q7" value="C"> "Il est mort"</label><br>
+      <label><input type="checkbox" name="q7" value="D"> "Je ne sais pas"</label>
+    </div>
+    <div class="question bonus">
+      <p>8. (BONUS) Quel châtiment Dieu donne-t-il à Caïn ?</p>
+      <label><input type="checkbox" name="q8" value="B"> Il le chasse de sa terre</label><br>
+      <label><input type="checkbox" name="q8" value="D"> Il le fait devenir errant</label><br>
+      <label><input type="checkbox" name="q8" value="A"> Il le rend pauvre</label><br>
+      <label><input type="checkbox" name="q8" value="C"> Il le rend invisible</label>
+    </div>
+    <div class="question">
+      <p>9. Pourquoi Dieu met-il un signe sur Caïn ?</p>
+      <label><input type="checkbox" name="q9" value="B"> Pour éviter qu'il soit tué</label><br>
+      <label><input type="checkbox" name="q9" value="A"> Pour le reconnaître facilement</label><br>
+      <label><input type="checkbox" name="q9" value="C"> Pour punir son apparence</label><br>
+      <label><input type="checkbox" name="q9" value="D"> Pour qu'il soit malade</label>
+    </div>
+    <div class="question">
+      <p>10. Quel sentiment important ce récit nous enseigne-t-il à maîtriser ?</p>
+      <label><input type="checkbox" name="q10" value="B"> La jalousie</label><br>
+      <label><input type="checkbox" name="q10" value="A"> La peur</label><br>
+      <label><input type="checkbox" name="q10" value="C"> La tristesse</label><br>
+      <label><input type="checkbox" name="q10" value="D"> La curiosité</label>
+    </div>
+    <button type="button" onclick="calculateScore()">Valider</button>
+  </form>
+  <div class="result" id="result"></div>
+
+  <script>
+    const correctAnswers = {
+      q1: ['D'],
+      q2: ['B'],
+      q3: ['A'],
+      q4: ['B', 'D'],
+      q5: ['C'], // BONUS
+      q6: ['C'],
+      q7: ['B'],
+      q8: ['B', 'D'], // BONUS
+      q9: ['B'],
+      q10: ['B']
+    };
+
+    const bonusQuestions = ['q5', 'q8'];
+
+    function calculateScore() {
+      let score = 0;
+      for (const [q, correct] of Object.entries(correctAnswers)) {
+        const selected = [...document.querySelectorAll(`input[name="${q}"]:checked`)].map(i => i.value);
+        const isBonus = bonusQuestions.includes(q);
+        const correctSet = new Set(correct);
+        const selectedSet = new Set(selected);
+
+        if (selected.length === correct.length && selected.every(v => correctSet.has(v))) {
+          score += isBonus ? 2 : (correct.length === 2 ? 1 : 1);
+        }
+      }
+      document.getElementById("result").textContent = `Ton score : ${score} / 10`;
+    }
+  </script>
+</body>
+</html>
