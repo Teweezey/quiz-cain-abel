@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Quiz Biblique : Noé et l'Arche</title>
+  <style>
+    body { font-family: Arial, sans-serif; max-width: 800px; margin: auto; padding: 20px; }
+    h1 { text-align: center; }
+    .question { margin-bottom: 20px; }
+    .bonus { color: green; font-weight: bold; }
+    button { padding: 10px 20px; font-size: 16px; }
+    .result { font-weight: bold; margin-top: 20px; font-size: 20px; }
+  </style>
+</head>
+<body>
+  <h1>Quiz Biblique : Noé et l'Arche</h1>
+  <form id="quizForm">
+    <div class="question">
+      <p>1. Pourquoi Dieu a-t-il voulu détruire les humains ?</p>
+      <label><input type="checkbox" name="q1" value="A"> Parce qu'ils étaient méchants</label><br>
+      <label><input type="checkbox" name="q1" value="B"> Parce qu'ils étaient trop nombreux</label><br>
+      <label><input type="checkbox" name="q1" value="C"> Parce qu'ils étaient paresseux</label><br>
+      <label><input type="checkbox" name="q1" value="D"> Parce qu'ils avaient trop d'animaux</label>
+    </div>
+    <div class="question">
+      <p>2. Pourquoi Dieu a-t-il choisi Noé ?</p>
+      <label><input type="checkbox" name="q2" value="A"> Parce qu'il était juste</label><br>
+      <label><input type="checkbox" name="q2" value="B"> Parce qu'il était riche</label><br>
+      <label><input type="checkbox" name="q2" value="C"> Parce qu'il avait des outils</label><br>
+      <label><input type="checkbox" name="q2" value="D"> Parce qu'il était jeune</label>
+    </div>
+    <div class="question">
+      <p>3. Que devait construire Noé ?</p>
+      <label><input type="checkbox" name="q3" value="B"> Une arche</label><br>
+      <label><input type="checkbox" name="q3" value="A"> Une tour</label><br>
+      <label><input type="checkbox" name="q3" value="C"> Un temple</label><br>
+      <label><input type="checkbox" name="q3" value="D"> Une maison en pierre</label>
+    </div>
+    <div class="question">
+      <p>4. Que faisait Noé pendant qu'il construisait l'arche ?</p>
+      <label><input type="checkbox" name="q4" value="A"> Il prêchait aux gens</label><br>
+      <label><input type="checkbox" name="q4" value="B"> Il chantait des psaumes</label><br>
+      <label><input type="checkbox" name="q4" value="C"> Il se cachait</label><br>
+      <label><input type="checkbox" name="q4" value="D"> Il vendait du bois</label>
+    </div>
+    <div class="question bonus">
+      <p>5. (BONUS) Qui est entré dans l'arche ?</p>
+      <label><input type="checkbox" name="q5" value="A"> Noé et sa famille</label><br>
+      <label><input type="checkbox" name="q5" value="B"> Des animaux</label><br>
+      <label><input type="checkbox" name="q5" value="C"> Tous les habitants du village</label><br>
+      <label><input type="checkbox" name="q5" value="D"> Les anges</label>
+    </div>
+    <div class="question">
+      <p>6. Combien d'animaux de chaque espèce sont montés dans l'arche ?</p>
+      <label><input type="checkbox" name="q6" value="A"> Un mâle et une femelle</label><br>
+      <label><input type="checkbox" name="q6" value="B"> Trois</label><br>
+      <label><input type="checkbox" name="q6" value="C"> Un seul</label><br>
+      <label><input type="checkbox" name="q6" value="D"> Huit</label>
+    </div>
+    <div class="question">
+      <p>7. Combien de temps a duré le déluge ?</p>
+      <label><input type="checkbox" name="q7" value="A"> 40 jours et 40 nuits</label><br>
+      <label><input type="checkbox" name="q7" value="B"> 7 jours</label><br>
+      <label><input type="checkbox" name="q7" value="C"> 3 mois</label><br>
+      <label><input type="checkbox" name="q7" value="D"> 365 jours</label>
+    </div>
+    <div class="question bonus">
+      <p>8. (BONUS) Que fit Noé après le déluge en sortant de l'arche ?</p>
+      <label><input type="checkbox" name="q8" value="A"> Il construisit un autel pour Dieu</label><br>
+      <label><input type="checkbox" name="q8" value="B"> Il fit un sacrifice</label><br>
+      <label><input type="checkbox" name="q8" value="C"> Il construisit une nouvelle arche</label><br>
+      <label><input type="checkbox" name="q8" value="D"> Il planta un jardin</label>
+    </div>
+    <div class="question">
+      <p>9. Quelle promesse Dieu fit-il à Noé ?</p>
+      <label><input type="checkbox" name="q9" value="A"> Il ne détruirait plus jamais la terre par un déluge</label><br>
+      <label><input type="checkbox" name="q9" value="B"> Il rendrait Noé roi</label><br>
+      <label><input type="checkbox" name="q9" value="C"> Il enverrait d'autres animaux</label><br>
+      <label><input type="checkbox" name="q9" value="D"> Il effacerait tous les souvenirs</label>
+    </div>
+    <div class="question">
+      <p>10. Quel signe Dieu a-t-il donné pour confirmer sa promesse ?</p>
+      <label><input type="checkbox" name="q10" value="A"> Un arc-en-ciel</label><br>
+      <label><input type="checkbox" name="q10" value="B"> Une étoile filante</label><br>
+      <label><input type="checkbox" name="q10" value="C"> Une comète</label><br>
+      <label><input type="checkbox" name="q10" value="D"> Une colombe</label>
+    </div>
+    <button type="button" onclick="calculateScore()">Valider</button>
+  </form>
+  <div class="result" id="result"></div>
+
+  <script>
+    const correctAnswers = {
+      q1: ['A'],
+      q2: ['A'],
+      q3: ['B'],
+      q4: ['A'],
+      q5: ['A', 'B'], // BONUS
+      q6: ['A'],
+      q7: ['A'],
+      q8: ['A', 'B'], // BONUS
+      q9: ['A'],
+      q10: ['A']
+    };
+
+    const bonusQuestions = ['q5', 'q8'];
+
+    function calculateScore() {
+      let score = 0;
+      for (const [q, correct] of Object.entries(correctAnswers)) {
+        const selected = [...document.querySelectorAll(`input[name="${q}"]:checked`)].map(i => i.value);
+        const isBonus = bonusQuestions.includes(q);
+        const correctSet = new Set(correct);
+        const selectedSet = new Set(selected);
+
+        if (selected.length === correct.length && selected.every(v => correctSet.has(v))) {
+          score += isBonus ? 2 : (correct.length === 2 ? 1 : 1);
+        }
+      }
+      document.getElementById("result").textContent = `Ton score : ${score} / 10`;
+    }
+  </script>
+</body>
+</html>
