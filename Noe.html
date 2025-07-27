@@ -1,124 +1,144 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8">
-  <title>Quiz Biblique : Noé et l'Arche</title>
+  <meta charset="UTF-8" />
+  <title>Quiz Biblique Multi-joueurs</title>
   <style>
-    body { font-family: Arial, sans-serif; max-width: 800px; margin: auto; padding: 20px; }
-    h1 { text-align: center; }
-    .question { margin-bottom: 20px; }
-    .bonus { color: green; font-weight: bold; }
-    button { padding: 10px 20px; font-size: 16px; }
-    .result { font-weight: bold; margin-top: 20px; font-size: 20px; }
+    body { font-family: Arial, sans-serif; max-width: 600px; margin: auto; padding: 20px; }
+    #quiz, #result, #leaderboard { display: none; margin-top: 20px; }
+    .question { margin-bottom: 15px; }
+    button { padding: 10px 15px; font-size: 16px; }
+    #leaderboard table { width: 100%; border-collapse: collapse; }
+    #leaderboard th, #leaderboard td { border: 1px solid #ddd; padding: 8px; text-align: left; }
   </style>
+  <!-- Firebase SDK -->
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
 </head>
 <body>
-  <h1>Quiz Biblique : Noé et l'Arche</h1>
-  <form id="quizForm">
+
+  <h1>Quiz Biblique Multi-joueurs</h1>
+
+  <div id="login">
+    <label>Entrez votre pseudo : <input type="text" id="username" maxlength="15" /></label>
+    <button onclick="startQuiz()">Commencer</button>
+  </div>
+
+  <form id="quiz">
     <div class="question">
-      <p>1. Pourquoi Dieu a-t-il voulu détruire les humains ?</p>
-      <label><input type="checkbox" name="q1" value="A"> Parce qu'ils étaient méchants</label><br>
-      <label><input type="checkbox" name="q1" value="B"> Parce qu'ils étaient trop nombreux</label><br>
-      <label><input type="checkbox" name="q1" value="C"> Parce qu'ils étaient paresseux</label><br>
-      <label><input type="checkbox" name="q1" value="D"> Parce qu'ils avaient trop d'animaux</label>
+      <p>1. Pourquoi Dieu voulait-il détruire les humains ?</p>
+      <label><input type="checkbox" name="q1" value="A" /> Ils étaient trop nombreux</label><br/>
+      <label><input type="checkbox" name="q1" value="B" /> Ils avaient faim</label><br/>
+      <label><input type="checkbox" name="q1" value="C" /> Ils faisaient le mal</label><br/>
+      <label><input type="checkbox" name="q1" value="D" /> Ils étaient trop vieux</label>
     </div>
+
     <div class="question">
-      <p>2. Pourquoi Dieu a-t-il choisi Noé ?</p>
-      <label><input type="checkbox" name="q2" value="A"> Parce qu'il était juste</label><br>
-      <label><input type="checkbox" name="q2" value="B"> Parce qu'il était riche</label><br>
-      <label><input type="checkbox" name="q2" value="C"> Parce qu'il avait des outils</label><br>
-      <label><input type="checkbox" name="q2" value="D"> Parce qu'il était jeune</label>
+      <p>2. Quelles qualités Noé possédait-il ? (2 réponses)</p>
+      <label><input type="checkbox" name="q2" value="A" /> Il était juste</label><br/>
+      <label><input type="checkbox" name="q2" value="B" /> Il était fort</label><br/>
+      <label><input type="checkbox" name="q2" value="C" /> Il était mauvais</label><br/>
+      <label><input type="checkbox" name="q2" value="D" /> Il était intègre</label>
     </div>
-    <div class="question">
-      <p>3. Que devait construire Noé ?</p>
-      <label><input type="checkbox" name="q3" value="B"> Une arche</label><br>
-      <label><input type="checkbox" name="q3" value="A"> Une tour</label><br>
-      <label><input type="checkbox" name="q3" value="C"> Un temple</label><br>
-      <label><input type="checkbox" name="q3" value="D"> Une maison en pierre</label>
-    </div>
-    <div class="question">
-      <p>4. Que faisait Noé pendant qu'il construisait l'arche ?</p>
-      <label><input type="checkbox" name="q4" value="A"> Il prêchait aux gens</label><br>
-      <label><input type="checkbox" name="q4" value="B"> Il chantait des psaumes</label><br>
-      <label><input type="checkbox" name="q4" value="C"> Il se cachait</label><br>
-      <label><input type="checkbox" name="q4" value="D"> Il vendait du bois</label>
-    </div>
-    <div class="question bonus">
-      <p>5. (BONUS) Qui est entré dans l'arche ?</p>
-      <label><input type="checkbox" name="q5" value="A"> Noé et sa famille</label><br>
-      <label><input type="checkbox" name="q5" value="B"> Des animaux</label><br>
-      <label><input type="checkbox" name="q5" value="C"> Tous les habitants du village</label><br>
-      <label><input type="checkbox" name="q5" value="D"> Les anges</label>
-    </div>
-    <div class="question">
-      <p>6. Combien d'animaux de chaque espèce sont montés dans l'arche ?</p>
-      <label><input type="checkbox" name="q6" value="A"> Un mâle et une femelle</label><br>
-      <label><input type="checkbox" name="q6" value="B"> Trois</label><br>
-      <label><input type="checkbox" name="q6" value="C"> Un seul</label><br>
-      <label><input type="checkbox" name="q6" value="D"> Huit</label>
-    </div>
-    <div class="question">
-      <p>7. Combien de temps a duré le déluge ?</p>
-      <label><input type="checkbox" name="q7" value="A"> 40 jours et 40 nuits</label><br>
-      <label><input type="checkbox" name="q7" value="B"> 7 jours</label><br>
-      <label><input type="checkbox" name="q7" value="C"> 3 mois</label><br>
-      <label><input type="checkbox" name="q7" value="D"> 365 jours</label>
-    </div>
-    <div class="question bonus">
-      <p>8. (BONUS) Que fit Noé après le déluge en sortant de l'arche ?</p>
-      <label><input type="checkbox" name="q8" value="A"> Il construisit un autel pour Dieu</label><br>
-      <label><input type="checkbox" name="q8" value="B"> Il fit un sacrifice</label><br>
-      <label><input type="checkbox" name="q8" value="C"> Il construisit une nouvelle arche</label><br>
-      <label><input type="checkbox" name="q8" value="D"> Il planta un jardin</label>
-    </div>
-    <div class="question">
-      <p>9. Quelle promesse Dieu fit-il à Noé ?</p>
-      <label><input type="checkbox" name="q9" value="A"> Il ne détruirait plus jamais la terre par un déluge</label><br>
-      <label><input type="checkbox" name="q9" value="B"> Il rendrait Noé roi</label><br>
-      <label><input type="checkbox" name="q9" value="C"> Il enverrait d'autres animaux</label><br>
-      <label><input type="checkbox" name="q9" value="D"> Il effacerait tous les souvenirs</label>
-    </div>
-    <div class="question">
-      <p>10. Quel signe Dieu a-t-il donné pour confirmer sa promesse ?</p>
-      <label><input type="checkbox" name="q10" value="A"> Un arc-en-ciel</label><br>
-      <label><input type="checkbox" name="q10" value="B"> Une étoile filante</label><br>
-      <label><input type="checkbox" name="q10" value="C"> Une comète</label><br>
-      <label><input type="checkbox" name="q10" value="D"> Une colombe</label>
-    </div>
-    <button type="button" onclick="calculateScore()">Valider</button>
+
+    <!-- Ajoute ici d'autres questions comme tu veux -->
+
+    <button type="button" onclick="submitQuiz()">Terminer</button>
   </form>
-  <div class="result" id="result"></div>
+
+  <div id="result"></div>
+
+  <div id="leaderboard">
+    <h2>Classement des joueurs</h2>
+    <table>
+      <thead><tr><th>Pseudo</th><th>Score</th></tr></thead>
+      <tbody id="scoresTable"></tbody>
+    </table>
+  </div>
 
   <script>
+    // TODO: Remplace cette config par ta config Firebase !
+    const firebaseConfig = {
+
+  apiKey: "AIzaSyBuf4dHpDz3nelxkcAc_X8fyPNNm5sAAjM",
+
+  authDomain: "quizzmaison-25acc.firebaseapp.com",
+
+  projectId: "quizzmaison-25acc",
+
+  storageBucket: "quizzmaison-25acc.firebasestorage.app",
+
+  messagingSenderId: "535028416908",
+
+  appId: "1:535028416908:web:4aa0dc3a8a0178d70916a9",
+
+  measurementId: "G-0PLH9G1GH9"
+
+};
+
+
+    firebase.initializeApp(firebaseConfig);
+    const db = firebase.database();
+
     const correctAnswers = {
-      q1: ['A'],
-      q2: ['A'],
-      q3: ['B'],
-      q4: ['A'],
-      q5: ['A', 'B'], // BONUS
-      q6: ['A'],
-      q7: ['A'],
-      q8: ['A', 'B'], // BONUS
-      q9: ['A'],
-      q10: ['A']
+      q1: ['C'],
+      q2: ['A', 'D']
+      // Ajoute les autres questions ici
     };
 
-    const bonusQuestions = ['q5', 'q8'];
+    let username = '';
 
-    function calculateScore() {
+    function startQuiz() {
+      username = document.getElementById('username').value.trim();
+      if(!username) {
+        alert('Veuillez entrer un pseudo');
+        return;
+      }
+      document.getElementById('login').style.display = 'none';
+      document.getElementById('quiz').style.display = 'block';
+    }
+
+    function submitQuiz() {
       let score = 0;
-      for (const [q, correct] of Object.entries(correctAnswers)) {
-        const selected = [...document.querySelectorAll(`input[name="${q}"]:checked`)].map(i => i.value);
-        const isBonus = bonusQuestions.includes(q);
-        const correctSet = new Set(correct);
-        const selectedSet = new Set(selected);
-
-        if (selected.length === correct.length && selected.every(v => correctSet.has(v))) {
-          score += isBonus ? 2 : (correct.length === 2 ? 1 : 1);
+      for (const [q, answers] of Object.entries(correctAnswers)) {
+        const selected = Array.from(document.querySelectorAll(`input[name="${q}"]:checked`)).map(el => el.value);
+        // Vérifie que toutes les bonnes réponses sont cochées, et aucune mauvaise
+        if (selected.length === answers.length && selected.every(a => answers.includes(a))) {
+          score++;
         }
       }
-      document.getElementById("result").textContent = `Ton score : ${score} / 10`;
+      document.getElementById('result').textContent = `Bravo ${username}, votre score est ${score} / ${Object.keys(correctAnswers).length}`;
+      document.getElementById('result').style.display = 'block';
+      document.getElementById('quiz').style.display = 'none';
+
+      // Enregistre le score dans Firebase
+      db.ref('scores/' + username).set(score);
+
+      // Affiche le classement
+      showLeaderboard();
+    }
+
+    function showLeaderboard() {
+      document.getElementById('leaderboard').style.display = 'block';
+      const scoresTable = document.getElementById('scoresTable');
+      scoresTable.innerHTML = '';
+
+      db.ref('scores').orderByValue().limitToLast(10).on('value', snapshot => {
+        const scores = [];
+        snapshot.forEach(child => {
+          scores.push({name: child.key, score: child.val()});
+        });
+        // Trie décroissant
+        scores.sort((a,b) => b.score - a.score);
+
+        scoresTable.innerHTML = '';
+        for (const player of scores) {
+          const row = `<tr><td>${player.name}</td><td>${player.score}</td></tr>`;
+          scoresTable.innerHTML += row;
+        }
+      });
     }
   </script>
+
 </body>
 </html>
